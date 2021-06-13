@@ -65,7 +65,7 @@ const galleryItems = [
 ];
 
 
-// const modal = document.querySelector(".js-lightbox");
+
 // const modalImg = document.querySelector(".lightbox__image");
 // const modalContent = document.querySelector(".lightbox__image");
 // const overlay = document.querySelector(".lightbox__overlay")
@@ -101,4 +101,7 @@ function modalOpen(event) {
    if (event.target.nodeName !== "IMG") {
         return
     };
-    };
+};
+    
+const modal = document.querySelector(".js-lightbox");
+modalOpen.classList.add('is-open');
