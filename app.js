@@ -66,24 +66,20 @@ const galleryItems = [
 
 
 
-// const modalImg = document.querySelector(".lightbox__image");
-// const modalContent = document.querySelector(".lightbox__image");
-// const overlay = document.querySelector(".lightbox__overlay")
-// const modalBtnClose = document.querySelector(".lightbox__button");
-// const modalBtnRight = document.querySelector(".scroll-right");
-// const modalBtnLeft = document.querySelector(".scroll-left");
-
-
-
-
-
 const imageList = document.querySelector(".js-gallery");
+const modal = document.querySelector(".js-lightbox");
+const btnClose = document.querySelector(".lightbox__button");
+const divModalEl = document.querySelector(".lightbox__content");
+const modalImg = document.querySelector(".lightbox__image")
+
+
+
 const newArray = []; 
 const elemets = galleryItems.map(({ preview, original, description }) => {
   const item = `<li class="gallery__item">
                 <a class="gallery__link"
                 href=${original}>
-                <img class="gallery__image"
+                <img loading="lazy" class="gallery__image"
                 src=${preview}
                 data-source=${original}
                 alt=${description} />
@@ -91,17 +87,31 @@ const elemets = galleryItems.map(({ preview, original, description }) => {
                 </li>`;
   newArray.push(item)
 });
-
 imageList.insertAdjacentHTML("afterbegin", newArray.join(''))
 
 imageList.addEventListener('click', modalOpen);
 
+function modalImage(src, alt) {
+  modalImg.src = `${src}`;
+  modalImg.alt = `${alt}`;
+};
+
+
 function modalOpen(event) {
   event.preventDefault();
-   if (event.target.nodeName !== "IMG") {
-        return
-    };
+  if (event.target.nodeName === "IMG") {
+    modal.classList.add('is-open');
+    modalImg.src = event.target.dataset.source;
+    modalImg.alt = event.target.alt;
+  }
+    return
 };
-    
-const modal = document.querySelector(".js-lightbox");
-modalOpen.classList.add('is-open');
+ 
+btnClose.addEventListener('click', modalClose);
+
+
+function modalClose(event) {
+  modal.classList.remove('is-open');
+  modalImg.removeAttribute("src");
+  modalImg.removeAttribute("alt");
+    }
