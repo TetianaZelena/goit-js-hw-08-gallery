@@ -91,10 +91,6 @@ imageList.insertAdjacentHTML("afterbegin", newArray.join(''))
 
 imageList.addEventListener('click', modalOpen);
 
-function modalImage(src, alt) {
-  modalImg.src = `${src}`;
-  modalImg.alt = `${alt}`;
-};
 
 
 function modalOpen(event) {
@@ -104,7 +100,7 @@ function modalOpen(event) {
     modalImg.src = event.target.dataset.source;
     modalImg.alt = event.target.alt;
   }
-    return
+   
 };
  
 btnClose.addEventListener('click', modalClose);
